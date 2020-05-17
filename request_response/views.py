@@ -47,10 +47,11 @@ class JSONParamView(View):
         response = http.HttpResponse('json类型参数 %s---%s'%(username,password))
         return response
 
-class URLParam3View(View):
-    def get(self,request,phone_nu3m):
+class URLParam2View(View):
+    def get(self,request,phone_num):
 
-        response = http.HttpResponse('re_path()提取路径参数: %s'%phone_nu3m)
+        response = http.HttpResponse('re_path()提取路径参数: %s'%phone_num)
+        print(phone_num)
 
 
         return response

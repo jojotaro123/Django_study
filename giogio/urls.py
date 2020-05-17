@@ -15,6 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.urls import register_converter
+from .converters import MobileConverter
+
+register_converter(MobileConverter, 'mobile')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),

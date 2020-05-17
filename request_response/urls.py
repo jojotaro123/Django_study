@@ -6,9 +6,12 @@ urlpatterns = [
     path('querystring/', views.QSParamView.as_view()),
     path('formdata/', views.FormDataParamView.as_view()),
     path('json/', views.JSONParamView.as_view()),
-    re_path(r'^url_param3/(?P<phone_nu3m>1[3-9]\d{9})/$', views.URLParam3View.as_view()),
+    # re_path(r'^url_param3/(?P<phone_nu3m>1[3-9]\d{9})/$', views.URLParam3View.as_view()),
+    path('url_param2/<mobile:phone_num>/', views.URLParam2View.as_view()),
     path('json_resp',views.JSONResponseView.as_view()),
     path('index/',views.IndexView.as_view(),name='index'),
-    path('/',views.IndexView.as_view()),
+
+    # re_path(r'^$',views.IndexView.as_view()),
+    path("",views.IndexView.as_view()),
     path('login_redirect/',views.LoginRedirectView.as_view()),
 ]

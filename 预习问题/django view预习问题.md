@@ -20,6 +20,10 @@
 
 ## ![1589560167621](C:\Users\86155\AppData\Roaming\Typora\typora-user-images\1589560167621.png)
 
+原因django的路径绝对不能以 / 开头
+
+解决：re_path(r'^$',views.IndexView.as_view()),
+
 
 
 ## 4.中间件执行顺序
