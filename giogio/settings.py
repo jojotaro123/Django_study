@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'users',
-    'request_response'
+    'request_response',
+    'booktest'
+
 ]
 
 MIDDLEWARE = [

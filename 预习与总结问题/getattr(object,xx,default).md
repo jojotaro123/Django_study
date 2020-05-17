@@ -1,0 +1,1 @@
+getattr(object,xx,default)
