@@ -28,8 +28,8 @@ class BookInsert(View):
 
         # 也可以这样使用, 直接获取的就是对象
         book = BookInfo.objects.get(id=1)
-        heros = book.heroinfo_set.all()
-
+        book.btitle = ('梦幻西游')
+        book.save()
 
 
 
