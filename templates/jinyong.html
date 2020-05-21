@@ -6,5 +6,10 @@
 </head>
 <body>
 
+    <ul >
+        {% for hero in heros %}
+            <li style="color: red">{{ hero.hname }}  :  <span style="color: blue">{{ hero.hbook}}</span></li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

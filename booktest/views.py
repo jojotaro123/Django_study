@@ -3,13 +3,14 @@ from booktest.models import BookInfo, HeroInfo
 from django.views import View
 from datetime import date
 from django import http
-from django.db.models import F,Q,Sum
+from django.db.models import F, Q, Sum
+
+
 # Create your views here.
 
 class BookInsert(View):
 
-    def get(self,request):
-
+    def get(self, request):
         # 你这样就是创建了一个实例对象， 不能直接把这个对象传给 hbook， 因为没保存
         # book = BookInfo(
         #     btitle='西游记',
@@ -36,18 +37,17 @@ class BookInsert(View):
         # book = BookInfo.objects.filter(is_delete=False)
         # print(book.count())
 
-        #查询书名包含湖的
+        # 查询书名包含湖的
         # book = BookInfo.objects.filter(btitle__contains='湖')
         # print(book)
 
-        #查询书名不为空的书籍
+        # 查询书名不为空的书籍
         # book = BookInfo.objects.filter(btitle__isnull=False)
         # print(book)
 
-        #查询书籍范围1，3，5
+        # 查询书籍范围1，3，5
         # book = BookInfo.objects.filter(id__in=[1,3,5])
         # print(book)
-
 
         # 查询阅读量大于评论量
         # book = BookInfo.objects.filter(bread__gt=F('bcomment'))
@@ -61,22 +61,21 @@ class BookInsert(View):
         # count = BookInfo.objects.aggregate(Sum('bread'))
         # print(count.get('bread__sum'))
 
-
         # 排序
         # book = BookInfo.objects.filter(btitle__isnull=False).order_by('bread')
         # print(book)
 
-        #关联查询 多查一
+        # 关联查询 多查一
         # hero = HeroInfo.objects.filter(hname__contains='黄')
         # print(hero)
         # book = hero.hbook
         # print(book)
         # print(book)
 
-        #修改
+        # 修改
         # HeroInfo.objects.filter(hname='孙悟空').update(hname='悟空')
 
-        #查all()
+        # 查all()
         #
         # heros = HeroInfo.objects.all()
         # print(heros)
@@ -87,11 +86,11 @@ class BookInsert(View):
         # print(book_name.bread)
         # print(book,type(book),'\r\n',book_name,type(book_name))
 
-        #作业2
+        # 作业2
         # book = BookInfo.objects.filter(btitle__contains='湖')
         # print(book)
 
-        #查询书名以'部'结尾的书籍 (模糊查询) (endswith、startswith)
+        # 查询书名以'部'结尾的书籍 (模糊查询) (endswith、startswith)
 
         # book = BookInfo.objects.filter(btitle__endswith='部')
         # print(book)
@@ -141,8 +140,31 @@ class BookInsert(View):
         # book = BookInfo.objects.get(id=1)
         # heros = book.heroinfo_set.all()
         # print(heros)
-
-
-
+        cookie1 = request.COOKIES
+        print(cookie1)
 
         return http.HttpResponse('成功')
+
+
+class JinYong(View):
+
+    def get(self, request):
+        heros = HeroInfo.objects.all()
+
+        context = {
+
+            'heros': heros,
+            'books': [book.hbook for book in heros]
+
+        }
+        print(context['books'])
+        cookie1 = request.COOKIES.get('jojo')
+        print(cookie1)
+
+        response = render(request, 'jinyong.html', context)
+        response.set_cookie('jojo', 'dio', max_age=3600)
+
+        # 设置session
+        request.session['username'] = 'jojo'
+
+        return response
